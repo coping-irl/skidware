@@ -11,6 +11,7 @@ import net.minecraft.client.model.ModelPlayer
 import net.minecraft.client.multiplayer.WorldClient
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.EntityLivingBase
 import net.minecraft.network.Packet
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.BlockPos
@@ -78,6 +79,13 @@ class KeyEvent(val key: Int) : Event()
 class MotionEvent(var x: Double, var y: Double, var z: Double, var yaw: Float, var pitch: Float, var onGround: Boolean) : Event() {
     var eventState: EventState = EventState.PRE
 }
+
+/**
+ * Called when player killed other entity
+ *
+ * @param targetEntity Attacked entity
+ */
+class EntityKilledEvent(val targetEntity: EntityLivingBase) : Event()
 
 /**
  * Called in "onLivingUpdate" when the player is using a use item.

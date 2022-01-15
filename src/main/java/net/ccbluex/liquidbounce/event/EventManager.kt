@@ -1,13 +1,8 @@
-/*
- * LiquidBounce+ Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/WYSI-Foundation/LiquidBouncePlus/
- */
 package net.ccbluex.liquidbounce.event
 
-import java.util.*
+import net.ccbluex.liquidbounce.utils.MinecraftInstance
 
-class EventManager {
+class EventManager : MinecraftInstance() {
 
     private val registry = HashMap<Class<out Event>, MutableList<EventHook>>()
 
@@ -17,15 +12,20 @@ class EventManager {
     fun registerListener(listener: Listenable) {
         for (method in listener.javaClass.declaredMethods) {
             if (method.isAnnotationPresent(EventTarget::class.java) && method.parameterTypes.size == 1) {
-                if (!method.isAccessible)
-                    method.isAccessible = true
+                try {
+                    if (!method.isAccessible) {
+                        method.isAccessible = true
+                    }
 
-                val eventClass = method.parameterTypes[0] as Class<out Event>
-                val eventTarget = method.getAnnotation(EventTarget::class.java)
+                    val eventClass = method.parameterTypes[0] as Class<out Event>
+                    val eventTarget = method.getAnnotation(EventTarget::class.java)
 
-                val invokableEventTargets = registry.getOrDefault(eventClass, ArrayList())
-                invokableEventTargets.add(EventHook(listener, method, eventTarget))
-                registry[eventClass] = invokableEventTargets
+                    val invokableEventTargets = registry.getOrDefault(eventClass, ArrayList())
+                    invokableEventTargets.add(EventHook(listener, method, eventTarget))
+                    registry[eventClass] = invokableEventTargets
+                } catch (t: Throwable) {
+                    t.printStackTrace()
+                }
             }
         }
     }
@@ -53,8 +53,9 @@ class EventManager {
 
         for (invokableEventTarget in targets) {
             try {
-                if (!invokableEventTarget.eventClass.handleEvents() && !invokableEventTarget.isIgnoreCondition)
+                if (!invokableEventTarget.eventClass.handleEvents() && !invokableEventTarget.isIgnoreCondition) {
                     continue
+                }
 
                 invokableEventTarget.method.invoke(invokableEventTarget.eventClass, event)
             } catch (throwable: Throwable) {

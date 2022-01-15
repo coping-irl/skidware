@@ -12,6 +12,7 @@ import net.ccbluex.liquidbounce.features.command.CommandManager
 import net.ccbluex.liquidbounce.features.module.ModuleManager
 import net.ccbluex.liquidbounce.features.special.AntiForge
 import net.ccbluex.liquidbounce.features.special.BungeeCordSpoof
+import net.ccbluex.liquidbounce.features.special.CombatManager
 import net.ccbluex.liquidbounce.file.FileManager
 import net.ccbluex.liquidbounce.script.ScriptManager
 import net.ccbluex.liquidbounce.script.remapper.Remapper.loadSrg
@@ -46,6 +47,7 @@ object LiquidBounce {
     lateinit var eventManager: EventManager
     lateinit var fileManager: FileManager
     lateinit var scriptManager: ScriptManager
+    lateinit var combatManager: CombatManager
 
     var betterFPSCore: BetterFPSCore = BetterFPSCore()
     lateinit var tipSoundManager: TipSoundManager
@@ -115,6 +117,10 @@ object LiquidBounce {
 
         // Register commands
         commandManager.registerCommands()
+
+
+        combatManager = CombatManager()
+        eventManager.registerListener(combatManager)
 
         // Load configs
         fileManager.loadConfigs(fileManager.modulesConfig, fileManager.valuesConfig, fileManager.accountsConfig,

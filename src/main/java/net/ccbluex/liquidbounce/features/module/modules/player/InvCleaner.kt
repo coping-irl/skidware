@@ -80,7 +80,7 @@ class InvCleaner : Module() {
     fun onUpdate(event: UpdateEvent) {
         if (!InventoryUtils.CLICK_TIMER.hasTimePassed(delay) ||
                 mc.currentScreen !is GuiInventory && invOpenValue.get() ||
-                noMoveValue.get() && MovementUtils.isMoving() ||
+                noMoveValue.get() && MovementUtils.isMoving ||
                 mc.thePlayer.openContainer != null && mc.thePlayer.openContainer.windowId != 0)
             return
 

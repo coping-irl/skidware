@@ -30,7 +30,7 @@ class Timer : Module() {
     fun onUpdate(event: UpdateEvent) {
         if (mc.thePlayer == null || mc.theWorld == null) return
 
-        if(MovementUtils.isMoving() || !onMoveValue.get()) {
+        if(MovementUtils.isMoving || !onMoveValue.get()) {
             mc.timer.timerSpeed = speedValue.get()
             return
         }

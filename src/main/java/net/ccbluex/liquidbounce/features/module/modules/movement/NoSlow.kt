@@ -78,7 +78,7 @@ class NoSlow : Module() {
 
     @EventTarget
     fun onMotion(event: MotionEvent) {
-        if (!MovementUtils.isMoving())
+        if (!MovementUtils.isMoving)
             return
 
         val heldItem = mc.thePlayer.heldItem

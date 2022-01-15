@@ -49,7 +49,7 @@ class Regen : Module() {
                 }
 
                 "spartan" -> {
-                    if (MovementUtils.isMoving() || !mc.thePlayer.onGround)
+                    if (MovementUtils.isMoving || !mc.thePlayer.onGround)
                         return
 
                     repeat(9) {

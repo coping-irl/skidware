@@ -103,7 +103,7 @@ class Step : Module() {
                 isStep = false
 
             mode.equals("aac3.3.4", true) -> if (mc.thePlayer.isCollidedHorizontally
-                    && MovementUtils.isMoving()) {
+                    && MovementUtils.isMoving) {
                 if (mc.thePlayer.onGround && couldStep()) {
                     mc.thePlayer.motionX *= 1.26
                     mc.thePlayer.motionZ *= 1.26
@@ -119,7 +119,7 @@ class Step : Module() {
             } else
                 isAACStep = false
             //exploit that ac step
-            mode.equals("1.5Twillight", true) -> if (MovementUtils.isMoving() &&
+            mode.equals("1.5Twillight", true) -> if (MovementUtils.isMoving &&
                     mc.thePlayer.isCollidedHorizontally) {
                 ticks++
                 if (ticks == 1) mc.thePlayer.motionY = 0.4399

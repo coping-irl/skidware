@@ -43,7 +43,7 @@ class Criticals : Module() {
             "NanoPacket",
             "Non-Calculable",
             "Invalid",
-            "FakeColide"
+            "FakeCollide"
         ),
         "Packet"
     )

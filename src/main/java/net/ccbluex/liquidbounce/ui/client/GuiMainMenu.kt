@@ -51,7 +51,7 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
             lastAnimTick = System.currentTimeMillis()
             alrUpdate = true
         }
-        val creditInfo = "made by epic group of paster."
+        val creditInfo = "i skidded it from so many sources idfk where i skidded it from lol"
         drawBackground(0)
         GL11.glPushMatrix()
         renderSwitchButton()
